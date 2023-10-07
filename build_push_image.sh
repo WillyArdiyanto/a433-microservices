@@ -1,7 +1,6 @@
 # Buat image Docker dari Dockerfile dari kriteria 2
 docker build -t item-app:v1 .
 
-export CR_PAT=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
 # Lihat daftar image
 docker images
 
