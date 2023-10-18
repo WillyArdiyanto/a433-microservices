@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: karsajobs-database
+spec:
+  serviceName: karsajobs-database
+  replicas: 1
+  selector:
+    matchLabels:
+      app: karsajobs-database
+  template:
+    metadata:
+      labels:
+        app: karsajobs-database
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo:latest 
+          ports:
+            - containerPort: 27017 
+          envFrom:
+            - configMapRef:
+                name: mongo-config
+            - secretRef:
+                name: mongo-secret
+          volumeMounts:
+            - name: mongo-persistent-storage
+              mountPath: /data/db 
+      volumes:
+        - name: mongo-persistent-storage
+          persistentVolumeClaim:
+            claimName: mongo-pv-claim
