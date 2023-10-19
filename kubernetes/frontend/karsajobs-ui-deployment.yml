@@ -24,5 +24,5 @@ spec: #atur spesifikasi resource
             - containerPort: 8000	
           env:
             - name: VUE_APP_BACKEND
-              #value: http://172.17.0.2:30007
-              value: http://127.0.0.1:52479
+              value: http://172.17.0.2:30007
+              #value: http://127.0.0.1:52479
