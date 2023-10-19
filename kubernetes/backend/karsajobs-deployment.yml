@@ -1,7 +1,8 @@
 apiVersion: apps/v1
+#untuk manifest deployment
 kind: Deployment
 metadata:
-  name: karsajobs
+  name: karsajobs #atur nama
 spec:
   replicas: 1
   selector:
@@ -14,10 +15,10 @@ spec:
     spec:
       containers:
         - name: karsajobs
-          image: ghcr.io/willyardiyanto/karsajobs:latest
+          image: ghcr.io/willyardiyanto/karsajobs:latest #setting container image
           ports:
             - containerPort: 8080
-          env:
+          env: #setting environment
             - name: APP_PORT
               value: "8080"
             - name: MONGO_USER

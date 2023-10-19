@@ -1,13 +1,13 @@
-apiVersion: v1
-kind: Service
-metadata:
+apiVersion: v1 #untuk versi umum
+kind: Service #untuk manifest service
+metadata: #untuk identifikasi resource
   labels:
     app: karsajobs
   name: karsajobs-backend
-spec:
+spec: #mengatur spesifikasi resource
   ports:
   - port: 8080
-    nodePort: 30007
+    nodePort: 30007 #setting node port statis
   selector:
     app: karsajobs
   type: NodePort
