@@ -1,15 +1,9 @@
 apiVersion: v1
-
-#untuk manifest persistenvolume
 kind: PersistentVolume
-
-#identitas resource
 metadata:
   name: mongo-pv
   labels:
     type: local
-
-#spesifikasi resource
 spec:
   capacity:
     storage: 1Gi 

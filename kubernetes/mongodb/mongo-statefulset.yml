@@ -1,7 +1,13 @@
 apiVersion: apps/v1
+
+#untuk manifest statefulset
 kind: StatefulSet
+
+#identitas resource
 metadata:
   name: karsajobs-database
+
+#spesifikasi resource
 spec:
   serviceName: karsajobs-database
   replicas: 1
@@ -18,6 +24,18 @@ spec:
           image: mongo:latest 
           ports:
             - containerPort: 27017 
+          env:
+          - name: MONGO_INITDB_ROOT_USERNAME_FILE
+            value: /etc/mongo-credentials/MONGO_ROOT_USERNAME
+          - name: MONGO_INITDB_ROOT_PASSWORD_FILE
+            value: /etc/mongo-credentials/MONGO_ROOT_PASSWORD
+          volumeMounts:
+          - name: mongo-data
+            mountPath: /data/db
+          - name: mongo-config
+            mountPath: /config
+          - name: mongo-credentials
+            mountPath: /etc/mongo-credentials
           envFrom:
             - configMapRef:
                 name: mongo-config
