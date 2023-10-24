@@ -1,0 +1,8 @@
+#Karsajobs backend
+https://github.com/users/WillyArdiyanto/packages/container/package/karsajobs
+ghcr.io/willyardiyanto/karsajobs:latest
+
+#Karsajobs frontend
+https://github.com/users/WillyArdiyanto/packages/container/package/karsajobs-ui
+ghcr.io/willyardiyanto/karsajobs-ui:latest
+
