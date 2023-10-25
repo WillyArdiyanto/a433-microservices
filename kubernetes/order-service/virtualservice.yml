@@ -1,0 +1,25 @@
+apiVersion: networking.istio.io/v1beta1
+
+kind: VirtualService
+
+metadata:
+  name: order-virtualservice
+  namespace: istio-system
+
+spec:
+  gateways:
+    - order-gateway
+
+  hosts:
+    - order.anbutech.xyz
+
+  http:
+    - match:
+        - uri:
+            exact: /order
+
+      route:
+        - destination:
+            host: order.dicoding.svc.cluster.local
+            port:
+              number: 80

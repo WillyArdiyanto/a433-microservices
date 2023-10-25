@@ -1,0 +1,47 @@
+#Menentuan versi API kubernetes dalam objek ini
+apiVersion: apps/v1
+
+#Menentukan jenis objek kubernetes yang dibuat
+kind: Deployment
+
+#Informasi tentang objek kubernetes
+metadata:
+  #Menamai objek k8s dengan nama order
+  name: order
+
+#Menentukan spesifikasi objek k8s
+spec:
+  #mengantur jumlah replika menjadi 1
+  replicas: 1
+
+  #Menentukan pod mana yang akan dikelola deployment, halam kasus ini adalah yang memiliki label app: order
+  selector:
+    matchLabels:
+      app: order
+
+  #Menentukan template pod pada deployment ini
+  template:
+    #menentukan identitas dari template
+    metadata:
+      #menerapkan label app: order kepada pod yang akan dibuat pada deployment ini 
+      labels:
+        app: order
+    #menentukan spesifikasi dari template
+    spec:
+      #mentukan nama container dan sumber image yang diambil dari github packages pada kriteria ke-2
+      containers:
+        - name: order
+          image: ghcr.io/willyardiyanto/order-service:v1
+          #menentukan port yang digunakan oleh container yaitu port 3000
+          ports:
+            - containerPort: 3000
+
+          #menentukan environment yang digunakan oleh container
+          env:
+            #mengatur nilai dari environment AMQP_URL dengan nilai "amqp://user:osdwq0dTLtKBnft3@rabbitmq-service:5672/myvhost"
+            - name: AMQP_URL
+              value: "amqp://user:osdwq0dTLtKBnft3@rabbitmq-service:5672/myvhost"
+
+            #mengatur nilai dari environent PORT dengan nilai 5672
+            - name: PORT
+              value: "5672"
