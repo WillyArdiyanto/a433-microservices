@@ -1,19 +1,31 @@
 version: "3.7"
 services:
+  # menentukan nama service = rabbit-mq
   rabbitmq:
+    #sumber image dari docker hub rabbitmq:3.11-management
     image: rabbitmq:3.11-management
+    #set nama container rabbitmq_container
     container_name: 'rabbitmq_container'
+    #set port container dan host
     ports:
         - 5673:5672
         - 15673:15672
+    #atur working directory ke ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/ dan ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
     volumes:
         - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
         - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    #atur network ke rabbitmq_network
     networks:
         - rabbitmq_network
+
+  #menentukan nama service sebagai order
   order:
+    #ambil image dari github package dari kriteria 2
     image: ghcr.io/willyardiyanto/order-service:v1
+    #set nama container ke order_service
     container_name: 'order_service'
+    working_dir: /app
+    #atur volume di 
     volumes:
       - .:/src
     depends_on:
