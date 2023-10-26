@@ -1,25 +1,25 @@
-apiVersion: networking.istio.io/v1beta1
-
-kind: VirtualService
+apiVersion: networking.istio.io/v1beta1  # Versi API Istio yang digunakan
+kind: VirtualService  # Jenis objek yang didefinisikan dalam manifest ini (VirtualService Istio)
 
 metadata:
-  name: order-virtualservice
-  namespace: istio-system
+  name: order-virtualservice  # Nama untuk VirtualService yang akan Anda buat
+  namespace: istio-system  # Namespace di mana VirtualService akan diatur
 
 spec:
   gateways:
-    - order-gateway
+    - order-gateway  # VirtualService ini terkait dengan Gateway bernama "order-gateway"
 
   hosts:
-    - order.anbutech.xyz
+    - "*"  # VirtualService ini akan digunakan untuk semua host (Wildcard)
 
   http:
     - match:
         - uri:
-            exact: /order
+            exact: /order  # Cocokkan permintaan dengan URI tepat "/order"
 
       route:
         - destination:
-            host: order.dicoding.svc.cluster.local
+            #host: shipping.dicoding.svc.cluster.local
+            host: order-service  # Arahkan permintaan ke host "order-service"
             port:
-              number: 80
+              number: 3000  # Gunakan port 3000
