@@ -1,8 +1,5 @@
-#Karsajobs backend
-https://github.com/users/WillyArdiyanto/packages/container/package/karsajobs
-ghcr.io/willyardiyanto/karsajobs:latest
-
-#Karsajobs frontend
-https://github.com/users/WillyArdiyanto/packages/container/package/karsajobs-ui
-ghcr.io/willyardiyanto/karsajobs-ui:latest
+https://github.com/users/WillyArdiyanto/packages/container/package/shipping-service
+ghcr.io/willyardiyanto/shipping-service:v1
+https://github.com/users/WillyArdiyanto/packages/container/package/order-service
+ghcr.io/willyardiyanto/order-service:v1
 
