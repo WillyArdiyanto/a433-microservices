@@ -16,7 +16,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 3001
+      targetPort: 3000
 # Menentukan pengaturan port untuk Service ini. Permintaan yang datang ke port 80 akan diarahkan ke port 3000 pada pod yang sesuai.
 
   type: ClusterIP

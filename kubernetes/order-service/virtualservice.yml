@@ -22,4 +22,4 @@ spec:
             #host: shipping.dicoding.svc.cluster.local
             host: order-service  # Arahkan permintaan ke host "order-service"
             port:
-              number: 3000  # Gunakan port 3000
+              number: 80  # Gunakan port 3000

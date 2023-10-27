@@ -21,4 +21,4 @@ spec:
             # host: shipping.dicoding.svc.cluster.local  # Nama host tujuan untuk rute
             host: shipping-service  # Nama host tujuan untuk rute (shiping-service)
             port:
-              number: 3001  # Nomor port untuk rute (port 3001)
+              number: 80  # Nomor port untuk rute (port 3001)
