@@ -14,7 +14,7 @@ helm repo update
 4. Buat manifest konfigurasi untuk rabbitmq dengan file value.yml
 5. Install rabbitmq
 ```
-helm install my-rabbitmq bitnami/rabbitmq -f values.yaml
+helm install my-rabbitmq bitnami/rabbitmq -f value.yaml
 ```
 6. Mengakses dari local machine dengan port-forwarding, mengekspos port 15672 di cluster ke port 15672 di host/localhost
 ```
