@@ -8,8 +8,8 @@ services:
     container_name: 'rabbitmq_container'
     #set port container dan host
     ports:
-        - 5673:5672
-        - 15673:15672
+        - 5672:5672
+        - 15672:15672
     #atur working directory ke ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/ dan ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
     volumes:
         - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
@@ -36,6 +36,7 @@ services:
       AMQP_URL: amqp://guest:guest@rabbitmq:5672
     networks:
       - rabbitmq_network
+  
   shipping:
     image: ghcr.io/willyardiyanto/shipping-service:v1
     container_name: 'shipping_service'
