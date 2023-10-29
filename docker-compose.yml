@@ -5,11 +5,11 @@ services:
     #sumber image dari docker hub rabbitmq:3.11-management
     image: rabbitmq:3.11-management
     #set nama container rabbitmq_container
-    container_name: 'rabbitmq_container'
+    container_name: 'rabbitmq_container_compose'
     #set port container dan host
     ports:
-        - 5672:5672
-        - 15672:15672
+        - 5673:5672
+        - 15673:15672
     #atur working directory ke ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/ dan ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
     volumes:
         - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
@@ -21,7 +21,7 @@ services:
   #menentukan nama service sebagai order
   order:
     #ambil image dari github package dari kriteria 2
-    image: ghcr.io/willyardiyanto/order-service:v1
+    image: ghcr.io/willyardiyanto/order-service:v2
     #set nama container ke order_service
     container_name: 'order_service'
     working_dir: /app
@@ -38,7 +38,7 @@ services:
       - rabbitmq_network
   
   shipping:
-    image: ghcr.io/willyardiyanto/shipping-service:v1
+    image: ghcr.io/willyardiyanto/shipping-service:v2
     container_name: 'shipping_service'
     volumes:
       - .:/src
@@ -50,6 +50,7 @@ services:
       AMQP_URL: amqp://guest:guest@rabbitmq:5672
     networks:
       - rabbitmq_network
+
 networks:
   rabbitmq_network:
     driver: bridge
