@@ -1,20 +1,19 @@
-# Menggunakan base image Node.js 14
-FROM node:14
-
-# Mengatur direktori kerja container ke /app
-WORKDIR /app
-
-# Meng-copy package.json dan package-lock.json ke direktori /app/
-COPY package.json package-lock.json /app/
-
-# Meng-copy file index.js ke direktori /app/
-COPY index.js /app/
-
-# Menjalankan perintah npm install untuk menginstal dependencies dari package.json
+FROM node:18-alpine as base
+WORKDIR /src
+COPY package*.json ./
+ 
+FROM base as production
+ENV NODE_ENV=production
+RUN npm ci
+COPY ./*.js ./
+CMD ["node", "index.js"]
+ 
+FROM base as dev
+RUN apk add --no-cache bash
+RUN wget -O /bin/wait-for-it.sh https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh
+RUN chmod +x /bin/wait-for-it.sh
+ 
+ENV NODE_ENV=development
 RUN npm install
-
-# Mengekspos port 3000 untuk koneksi dari luar container
-EXPOSE 3000
-
-# Perintah yang akan dijalankan saat container berjalan, yaitu menjalankan aplikasi Node.js
+COPY ./*.js ./
 CMD ["node", "index.js"]
