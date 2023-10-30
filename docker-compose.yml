@@ -24,13 +24,15 @@ services:
     image: ghcr.io/willyardiyanto/order-service:v2
     #set nama container ke order_service
     container_name: 'order_service'
-    working_dir: /app
+    ports:
+      - 3000:3000  # Mengatur port untuk layanan order menjadi 3000
+    working_dir: /src
     #atur volume di 
-    volumes:
-      - .:/src
+    #volumes:
+    #  - .:/src
     depends_on:
       - "rabbitmq"
-    command: sh -c '/bin/wait-for-it.sh rabbitmq:5672 --timeout=30 -- node consumer.js'
+    command: sh -c '/bin/wait-for-it.sh rabbitmq:5672 --timeout=30 -- node index.js'
     environment:
       NODE_ENV: production
       AMQP_URL: amqp://guest:guest@rabbitmq:5672
@@ -40,11 +42,14 @@ services:
   shipping:
     image: ghcr.io/willyardiyanto/shipping-service:v2
     container_name: 'shipping_service'
-    volumes:
-      - .:/src
+    ports:
+      - 3001:3001  # Mengatur port untuk layanan shipping menjadi 3001
+    working_dir: /src
+    #volumes:
+    #  - .:/src
     depends_on:
       - "rabbitmq"
-    command: sh -c '/bin/wait-for-it.sh rabbitmq:5672 --timeout=30 -- node consumer.js'
+    command: sh -c '/bin/wait-for-it.sh rabbitmq:5672 --timeout=30 -- node index.js'
     environment:
       NODE_ENV: production
       AMQP_URL: amqp://guest:guest@rabbitmq:5672
